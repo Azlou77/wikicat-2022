@@ -1,0 +1,211 @@
+.form-controller{
+  position: relative;
+  padding: 5px 5px 5px;
+  width: 100%;
+
+  .form-input-back{
+    background-color: map-deep-get($theme-colors, "dark", "600");
+    border: solid 1px map-deep-get($theme-colors, "dark", "400");
+    height: 36px;
+    width: 100%;
+    border-radius: 100px;
+    padding: 0.7rem;
+    color: map-deep-get($theme-colors, "dark", "100");
+    transition: all .3s;
+
+    &::placeholder {
+      color: map-deep-get($theme-colors, "dark", "400");
+      font-style: italic;
+    }
+
+    &:focus {
+      border: solid 1px map-deep-get($theme-colors, "primary", "800");
+      outline: none;
+    }
+  }
+
+  .form-input{
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid grey;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #222;
+    padding: 7px 0;
+    background: transparent;
+    border-image: none;
+    transition:  border-image 0.2s;
+
+    &::placeholder {
+      color: transparent;
+      font-size: 0.8rem;
+    }
+
+    &:placeholder-shown ~ .form-label {
+      font-size: 1.3rem;
+      cursor: text;
+      top: 20px;
+    }
+
+    &:focus {
+      ~ .form-label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: map-get(map-get($theme-colors, "primary"), "700");
+        font-weight:700;
+      }
+
+      &::placeholder {
+        color: grey;
+      }
+
+      padding-bottom: 6px;
+      font-weight: 700;
+      border-width: 3px;
+      border-image: linear-gradient(to right, map-get(map-get($theme-colors, "primary"), "700"), map-get(map-get($theme-colors, "info"), "400"));
+      border-image-slice: 1;
+    }
+    &:required,&:invalid { box-shadow:none; }
+
+    &.form-input--validate{
+      border-width: 3px;
+      border-image: linear-gradient(to right, map-get(map-get($theme-colors, "success"), "700"), map-get(map-get($theme-colors, "success"), "300"));
+      border-image-slice: 1;
+
+      ~ .form-label {
+        position: absolute;
+        top: 0;
+        display: block;
+        color: map-get(map-get($theme-colors, "success"), "700");
+      }
+    }
+
+    &.form-input--reject{
+      border-width: 3px;
+      border-image: linear-gradient(to right, map-get(map-get($theme-colors, "danger"), "700"), map-get(map-get($theme-colors, "danger"), "200"));
+      border-image-slice: 1;
+
+      ~ .form-label {
+        position: absolute;
+        top: 0;
+        display: block;
+        color: map-get(map-get($theme-colors, "danger"), "700");
+      }
+    }
+  }
+
+  .form-checkbox[type="checkbox"]{
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: map-get(map-get($theme-colors, "primary"), "800");
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid map-get(map-get($theme-colors, "grey"), "700");
+    border-radius: 0.2em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+
+    &:before{
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 0.1em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em map-get(map-get($theme-colors, "primary"), 800);
+      transform-origin: bottom left;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+
+    &:checked{
+      &:before{
+        transform: scale(1);
+      }
+    }
+
+    &:disabled {
+      color: map-get(map-get($theme-colors, "grey"), "300");
+      width: 1.15em;
+      height: 1.15em;
+      border: 0.15em solid map-get(map-get($theme-colors, "grey"), "300");
+    }
+  }
+
+  .form-radio[type="radio"]{
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: map-get(map-get($theme-colors, "primary"), "800");
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid map-get(map-get($theme-colors, "grey"), "700");
+    border-radius: 50em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+
+    &:before{
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em map-get(map-get($theme-colors, "primary"), 800);
+    }
+
+    &:checked{
+      &:before{
+        transform: scale(1);
+      }
+    }
+
+    &:disabled {
+      color: map-get(map-get($theme-colors, "grey"), "300");
+      width: 1.15em;
+      height: 1.15em;
+      border: 0.15em solid map-get(map-get($theme-colors, "grey"), "300");
+    }
+  }
+
+  .form-label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s, font-weight .2s;
+    font-weight: 400;
+    font-size: 1rem;
+    color: grey;
+  }
+
+  .upload-icon{
+    background-image: url("../images/upload-icon.png");
+  }
+
+  .input-file{
+    all: unset;
+    padding: 0.5em 1.8em;
+    margin: 5px;
+    color: #FFF;
+    font-size: 0.9rem;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+    font-weight: 700;
+  }
+
+  &.file-group{
+    display: inline-flex;
+    background-color: #222731;
+    border: solid 1px #3F4756;
+    width: auto;
+  }
+}
